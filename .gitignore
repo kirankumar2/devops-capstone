@@ -1,0 +1,4 @@
+venv/       → DON'T TRACK
+__pycache__ → DON'T TRACK
+*.pyc       → DON'T TRACK
+.env        → DON'T TRACK
