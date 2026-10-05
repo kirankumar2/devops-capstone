@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 020272287599.dkr.ecr.eu-north-1.amazonaws.com
+
+  build:
+    commands:
+      - echo Building Docker image...
+      - docker build -t devops-capstone .
+
+  post_build:
+    commands:
+      - echo Tagging Docker image...
+      - docker tag devops-capstone:latest 020272287599.dkr.ecr.eu-north-1.amazonaws.com/devops-capstone:latest
+      - echo Pushing Docker image to ECR...
+      - docker push 020272287599.dkr.ecr.eu-north-1.amazonaws.com/devops-capstone:latest
